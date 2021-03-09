@@ -1,0 +1,23 @@
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Tipo de comida</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let restaurante of restaurantes" [class.seleccionado]="restaurante===restauranteSeleccionado" (click)="mostrarElemento(restaurante)">
+            <td>{{restaurante.nombre}}</td>
+            <td>{{restaurante.direccion}}</td>
+            <td>{{restaurante.telefono}}</td>
+            <td>{{restaurante.tipoComida}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <app-restaurante-seleccionado [restaurante]="restauranteSeleccionado"></app-restaurante-seleccionado>
+</div>

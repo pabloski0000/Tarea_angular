@@ -1,0 +1,10 @@
+.plazasDisponibles{
+    color: red;
+}
+
+.restauranteSeleccionado{
+    display: inline-block;
+    background-color: #DDD;
+    max-width: 25%;
+    min-width: 25%;
+}

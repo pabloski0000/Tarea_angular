@@ -1,0 +1,21 @@
+
+<div *ngIf="restaurante" class="restauranteSeleccionado">
+    <h1>{{restaurante.nombre}}</h1>
+    <p>{{restaurante.direccion}}</p>
+    <p><strong>Teléfono de reservas: </strong>{{restaurante.telefono}}</p>
+    <p><strong>Tipo de comida: </strong>{{restaurante.tipoComida}}</p>
+    <p><strong>Precio medio: </strong>{{restaurante.precioMedio}}€</p>
+    <h2 class="plazasDisponibles">Plazas disponibles: {{restaurante.numeroPlazas}}</h2>
+
+    <button (click)="mostrarFormulario()" [disabled]="formularioActivado">Rellenar Formulario</button>
+
+    <!--Funcionalidad extra incluida-->
+    <!--<button (click)="mostrarFormulario()" [hidden]="!formularioActivado">Quitar Formulario</button>-->
+</div>
+
+<!--Si se quisiera trabajar con @Output en vez de @Host habría que añadir la línea siguiente: -->
+<!--(desactivarFormulario)="asignarValorFormularioActivado($event)" y crear un método correspondiente en la clase hijo para-->
+<!-- enviar el valor de la propiedad-->
+<app-formulario-restaurante [formularioActivado]="formularioActivado" [restaurante]="restaurante"></app-formulario-restaurante>
+
+<!--<pre>Padre: {{formularioActivado | json}}</pre>-->

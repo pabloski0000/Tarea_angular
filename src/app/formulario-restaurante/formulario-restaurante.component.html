@@ -1,0 +1,42 @@
+<div *ngIf="formularioActivado" class="formularioDiv">
+
+    <form #formulario="ngForm" action="#" method="get" class="formularioReserva formularioReservaRestaurante">
+
+        <div>
+            <label for="inputNombre">Nombre: </label>
+            <input #campoNombre="ngModel" placeholder="Perico" type="text" name="nombre" id="inputNombre" minlength="2" [(ngModel)]="datosReserva.nombre" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}">
+            <p class="letraRoja" *ngIf="campoNombre.invalid && campoNombre.touched">Comprueba si ha introducido bien el nombre</p>
+        </div>
+    
+        <div>
+            <label for="inputTelefono">Teléfono: </label>
+            <input #campoTelefono="ngModel" type="number" name="telefono" id="inputTelefono" [(ngModel)]="datosReserva.telefono" pattern="[6-7][0-9]{8}">
+            <p class="letraRoja" *ngIf="campoTelefono.invalid && campoTelefono.touched">Comprueba si ha introducido bien el teléfono</p>
+        </div>
+
+        <div>
+            <label for="inputNumeroPlazas">Nº Plazas: </label>
+            <input #campoPlazas="ngModel" type="number" name="numeroPlazas" id="inputNumeroPlazas" [(ngModel)]="datosReserva.plazasAReservar" pattern="[0-9]+">
+        </div>
+
+        <div>
+            <label for="inputFecha">Fecha: </label>
+            <input #campoFecha="ngModel" type="date" name="fecha" id="inputFecha" [(ngModel)]="datosReserva.fecha">
+        </div>
+
+        <div>
+            <label for="inputHora">Hora: </label>
+            <input #campoHora="ngModel" type="time" name="hora" id="inputHora" [(ngModel)]="datosReserva.hora">
+        </div>
+    
+        <input type="button" value="Reservar" (click)="mostrarMensaje()" [disabled]="formulario.invalid || campoNombre.pristine || campoTelefono.pristine || campoPlazas.pristine || campoFecha.pristine || campoHora.pristine">
+    </form>
+</div>
+
+<div class="informacionDiv" *ngIf="mostrarMensajeTexto && !formularioActivado">
+    <p *ngIf="suficientesPlazas">Reserva realizada con éxito para el día {{datosReserva.fecha}} a la hora {{datosReserva.hora}} para {{datosReserva.plazasAReservar}}</p>
+    <p *ngIf="!suficientesPlazas">Imposible realizar la reserva para el día {{datosReserva.fecha}} a la hora {{datosReserva.hora}} para {{datosReserva.plazasAReservar}}. No hay plazas.</p>
+    <button (click)="botonVolver()">Volver</button>
+</div>
+
+<!--<pre>Hijo: {{formularioActivado | json}}</pre>-->
